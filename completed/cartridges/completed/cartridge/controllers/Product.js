@@ -77,7 +77,7 @@ server.append('Show', function (req, res, next) {
        ///////////////////////////detailed description //////////////////////////////
        setAllAttribute( res.getViewData()) ; // will set all the attribute group in the viewData
        ///////////////////////////THE Essentials//////////////////////////////
-     //  setAlllinkedProducts( res.getViewData());  //will set all the essentials product set in the viewData
+      setAlllinkedProducts( res.getViewData());  //will set all the essentials product set in the viewData
     next()
 });
 
