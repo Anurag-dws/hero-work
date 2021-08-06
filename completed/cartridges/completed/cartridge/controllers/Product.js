@@ -62,11 +62,13 @@ function setAllAttribute(viewData){
  */
 function setAlllinkedProducts(viewData){
     var Proudct_ = ProductMgr.getProduct( viewData.product.id); 
- 
+    var ProductFactory = require('*/cartridge/scripts/factories/product');
     viewData.esssentialProducts =[];
      var allProductLinks =  Proudct_.getAllProductLinks(); //will get the list of all the linked essential Products;
      for(let i=0;i<allProductLinks.size();i++){
-      viewData.esssentialProducts.push(allProductLinks[i].targetProduct);
+        let obj={}
+        obj.pid=allProductLinks[i].targetProduct.ID ; //we need to create the string as query parameter and send in to product factory
+        viewData.esssentialProducts.push(ProductFactory.get(obj));
      } 
      return ;
 }
