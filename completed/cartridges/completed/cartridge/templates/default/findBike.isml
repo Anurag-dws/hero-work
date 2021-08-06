@@ -1,0 +1,56 @@
+
+
+
+<isdecorate template="common/layout/pageCustom">
+<iscomment>
+
+	TEMPLATENAME: findBike.isml </iscomment>
+	<isscript>
+var assets = require('*/cartridge/scripts/assets.js');
+assets.addCss('/css/findBike.css'); 
+assets.addJs('/js/findBike.js');
+ </isscript>
+
+<div class="hero slant-down login-banner">
+	<h1>Find My Bike </h1>
+	<iscomment> <h1>${pdict.hello} </h1>
+	<h1>${pdict.helloAgain} </h1> </iscomment>
+</div>
+
+<div id="card">
+	<iscomment> filling the findmybike form </iscomment>
+ 
+	<form action="${pdict.actionUrl}"  class="address-form" method="POST" name="findmybike">
+		<div class="form-group required">
+			<label> ${"Age"} </label> <input type="input" id="age" class="form-control" name="age">
+		</div>
+		<div class="form-group required">
+			<label> ${"Gender"} </label> 
+			                   <select class="form-control" name="gender"  id="gender"> 
+                                    <option value="female" >Female</option>
+                                    <option value="male" >Male</option>
+                                    <option value="unisex" >Unisex</option>
+                                   
+                               </select>
+		</div>
+		<div class="form-group required">
+			<label> ${"Height"} </label> <input type="input" id="height" class="form-control" name="height">
+		</div>
+		<div class="form-group required">
+		                      <label> ${"Type of Bike"} </label>
+		                       <select class="form-control" name="category"  id="category"> 
+                                    <option value="MTB" >MTB</option>
+                                    <option value="Hybrid" >Hybrid</option>
+                                    <option value="Road" >Road</option>
+                                    <option value="Speciality" >Speciality</option>
+                               </select>
+			
+		</div>
+
+
+		<button type="submit" class="btn btn-block btn-primary">Submit</button>
+		<button type="submit" class="btn btn-block btn-primary">Cancel</button>
+	</form>
+
+</div>
+</isdecorate>

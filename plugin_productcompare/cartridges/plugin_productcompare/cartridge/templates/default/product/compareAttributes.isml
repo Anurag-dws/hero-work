@@ -1,0 +1,55 @@
+<table class="table table-striped-column">
+    <colgroup>
+        <col style="width:${100/(pdict.pids.length + 1)}%" />
+        <isloop items="${pdict.pids}" var="productId">
+            <col style="width:${100/(pdict.pids.length + 1)}%" />
+        </isloop>
+    </colgroup>
+    <thead>
+        <tr>
+            <th scope="col"></th>
+            <isloop items="${pdict.pids}" var="productId">
+                <td class="product-header"><isinclude url="${URLUtils.url('Tile-Show', 'pid', productId, 'swatches', true, 'ratings', true, 'compare', false)}" /></td>
+            </isloop>
+        </tr>
+    </thead>
+    <tbody>
+        <isloop items="${pdict.attributes}" var="attribute" status="loopState">
+            <tr>
+                <th scope="col">${attribute.displayName}</th>
+                <isloop items="${pdict.attributes[loopState.index].values}" var="attrs">
+                    <td style="width:${100/(pdict.pids.length + 1)}%">${attrs.values}</td>
+                </isloop>
+            </tr>
+        </isloop>
+    </tbody>
+</table>
+
+<!--  our own custom defined comparison -->
+<h1>customized comparison </h1>
+<table class="table table-striped-column">
+    <colgroup>
+        <col style="width:${100/(pdict.pids.length + 1)}%" />
+        <isloop items="${pdict.pids}" var="productId">
+            <col style="width:${100/(pdict.pids.length + 1)}%" />
+        </isloop>
+    </colgroup>
+    <thead>
+        <tr>
+            <th scope="col"></th>
+            <isloop items="${pdict.pids}" var="productId">
+                <td class="product-header"><isinclude url="${URLUtils.url('Tile-Show', 'pid', productId, 'swatches', true, 'ratings', true, 'compare', false)}" /></td>
+            </isloop>
+        </tr>
+    </thead>
+    <tbody>
+        <isloop items="${pdict.attributesTemp}" var="attribute" status="loopState">
+            <tr>
+                <th scope="col">${attribute.name}</th>
+                <isloop items="${attribute.product}" var="attrs" status="inLoopState">
+                    <td style="width:${100/(pdict.pids.length + 1)}%"> ${attrs}</td>
+                </isloop>
+            </tr>
+        </isloop>
+    </tbody>
+</table>

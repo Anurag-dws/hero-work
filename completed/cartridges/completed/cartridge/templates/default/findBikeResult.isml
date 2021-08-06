@@ -1,0 +1,61 @@
+   
+<iscomment>
+
+TEMPLATENAME: findBikeResult.isml 
+
+<!DOCTYPE html>
+ <html>
+<head>
+<link rel="stylesheet" href="${URLUtils.staticURL('/css/global.css')}" />
+<isloop items="${ require('*/cartridge/scripts/assets.js').styles }" var="style">
+    <link rel="stylesheet" href="${style.src}" <isif condition="${style.integrity != null}">integrity="${style.integrity}" crossorigin="anonymous"</isif> />
+</isloop>
+</head>
+
+<body>   
+</iscomment>
+<isdecorate template="common/layout/pageCustom">
+  <isscript>
+var assets = require('*/cartridge/scripts/assets.js');
+assets.addCss('/css/findBikeResult.css'); 
+assets.addJs('/js/findBikeResult.js'); 
+
+</isscript>
+
+
+
+<h1>Welcome to the Find your Bike Page</h1>
+
+
+
+<div id="body" >
+
+
+               <isloop iterator="${pdict.Products}" var="product" status="loopStatus">
+                  
+                        <img src="${product.images.small[0].absURL}" />
+                
+                    
+                    <p>${'Id is '} <isprint value="${product.ID}"></isprint>
+                    </p>
+                    <p>${'Name :'} <isprint value="${product.name}"></isprint>
+                    </p>
+                    <p>Price:
+                        <isset name="productImg"
+                            value="${require('dw/catalog/ProductMgr').getProduct(product.ID).getPriceModel().getMaxPrice()}"
+                            scope="page" />
+                        ${productImg}</p>
+                    <hr />
+
+                </isloop>
+
+</div>
+
+<div>
+<h1> your selected value is  </h1>
+<p>your age is ${pdict.age}</p>
+  <p>your gender is ${pdict.gender} </p>
+<p>your height is ${pdict.height} </p>
+<p>your selected category is  ${pdict.category} </p>
+</div>
+</isdecorate>

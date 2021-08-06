@@ -1,0 +1,35 @@
+<isdecorate template="common/layout/pageCustom">
+<iscomment>
+
+	TEMPLATENAME: productIdResult.isml </iscomment>
+	<isscript>
+var assets = require('*/cartridge/scripts/assets.js');
+assets.addCss('/cssproductIdResult.css'); 
+assets.addJs('/js/productIdResult.js');
+ </isscript>
+
+
+	<h1> description Page of the Product </h1>
+
+
+<div id="card">
+ 
+	<div class="frameSet">
+    
+    </div>
+    <div class="driveTrain">
+    
+    </div>
+    <div class="wheels">
+    
+    </div>
+    <div class="components">
+    
+    </div>
+    <div class="DIM">
+    
+    </div>
+
+
+</div>
+</isdecorate>

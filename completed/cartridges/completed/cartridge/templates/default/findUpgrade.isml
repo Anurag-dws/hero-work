@@ -1,0 +1,98 @@
+
+
+
+<isdecorate template="common/layout/pageCustom">
+<iscomment>
+
+	TEMPLATENAME: findUpgrade.isml </iscomment>
+
+
+	<isscript>
+var assets = require('*/cartridge/scripts/assets.js');
+assets.addCss('/css/findBike.css'); 
+assets.addJs('/js/findBike.js');
+ </isscript>
+
+
+	<h1>Find Upgrade </h1>
+
+
+<div id="card">
+	<iscomment> filling the FindUpgrade form </iscomment>
+<form action="${pdict.actionUrl}"  class="address-form" method="POST" name="findUpgrade">
+		<div class="form-group required">
+      
+	       <iscomment> gender  </iscomment>
+
+             <div class="form-group
+                 ${pdict.FindUpgrade.gender.mandatory === true ? 'required' : ''}">
+                <label class="form-control-label" for="gender">
+                     <isprint value="${pdict.FindUpgrade.gender.label}" encoding="htmlcontent" />
+                </label>
+                <select class="form-control custom-select" id="gender" <isprint value="${pdict.FindUpgrade.gender.attributes}" encoding="off" >
+                    <isloop items=${pdict.FindUpgrade.gender.options} var="gender_">
+                        <option id="${gender_.id}" value="${gender_.htmlValue}" <isif condition="${gender_.selected}">selected</isif> >${gender_.label}</option>
+                    </isloop>
+                </select>
+                <div class="invalid-feedback">
+                </div>
+            </div>
+ 
+			 <iscomment> do you have firefox bike ? </iscomment>
+             <div class="form-group
+                 ${pdict.FindUpgrade.firefox.mandatory === true ? 'required' : ''}">
+                <label class="form-control-label" for="firefox">
+                     <isprint value="${pdict.FindUpgrade.firefox.label}" encoding="htmlcontent" />
+                </label>
+                <select class="form-control custom-select" id="firefox" <isprint value="${pdict.FindUpgrade.firefox.attributes}" encoding="off" >
+                    <isloop items=${pdict.FindUpgrade.firefox.options} var="firefox_">
+                        <option id="${firefox_.id}" value="${firefox_.htmlValue}" <isif condition="${firefox_.selected}">selected</isif> >${firefox_.label}</option>
+                    </isloop>
+                </select>
+                <div class="invalid-feedback">
+                </div>
+              </div>
+
+		
+
+			 <iscomment> type of bike(category)  </iscomment>
+             <div class="form-group
+                 ${pdict.FindUpgrade.category.mandatory === true ? 'required' : ''}">
+                <label class="form-control-label" for="category">
+                     <isprint value="${pdict.FindUpgrade.category.label}" encoding="htmlcontent" />
+                </label>
+                <select class="form-control custom-select" id="category" <isprint value="${pdict.FindUpgrade.category.attributes}" encoding="off" >
+                    <isloop items=${pdict.FindUpgrade.category.options} var="category_">
+                        <option id="${category_.id}" value="${category_.htmlValue}" <isif condition="${category_.selected}">selected</isif> >${category_.label}</option>
+                    </isloop>
+                </select>
+                <div class="invalid-feedback">
+                </div>
+              </div>
+            <iscomment> name of the bike  </iscomment>
+
+            <div class="form-group
+                ${pdict.FindUpgrade.name.mandatory === true ? 'required' : ''}">
+                <label class="form-control-label" for="age">
+                    <isprint value="${pdict.FindUpgrade.name.label}" encoding="htmlcontent" />
+                </label>
+                <input type="text" class="form-control" id="age"
+                    <isprint value="${pdict.FindUpgrade.name.attributes}" encoding="off" />
+                    >
+                <div class="invalid-feedback"></div>
+            </div>
+
+         </div>
+           <!--  Submit Button -->
+          <div class="">
+           
+            
+               <button type="submit" name="save" class="btn btn-save btn-block btn-primary">${Resource.msg('button.save','account',null)}</button>
+         
+          </div>
+
+
+
+	</form>
+</div>
+</isdecorate>

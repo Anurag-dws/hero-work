@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<form xmlns="http://www.demandware.com/xml/form/2008-04-19">
+    <field formid="gender" label="identify yourself from the following" type="string" mandatory="true">
+     <options>
+            <option optionid="" label="default" value=""/>
+            <option optionid="male" label="Male" value="male"/>
+            <option optionid="female" label="Female" value="female"/>
+            <option optionid="kids" label="Kids" value="kids"/>
+        </options>
+    </field>
+    <field formid="firefox" label="Do you own a firefox bike?" type="string" mandatory="true">
+     <options>
+            <option optionid="" label="default" value=""/>
+            <option optionid="yes" label="Yes" value="yes"/>
+            <option optionid="no" label="No" value="no"/>
+        </options>
+    </field>
+    <field formid="category" label="Could you tell something about your bike" type="string" mandatory="true">
+      <options>
+            <option optionid="" label="default" value=""/>
+            <option optionid="MTB" label="MTB" value="MTB"/>
+            <option optionid="Road" label="ROAD" value="Road"/>
+            <option optionid="Hybrid" label="HYBRID" value="Hybrid"/>
+            <option optionid="City" label="CITY" value="city"/>
+            <option optionid="Electric" label="ELECTRIC" value="Electric"/>
+        </options>
+    </field>
+   <field formid="name" label="One last thing! what's it called?" type="string" mandatory="true" max-length="20"/>
+<action formid="submit" valid-form="true"/>
+<action formid="cancel" valid-form="false"/>
+</form>

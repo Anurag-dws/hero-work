@@ -1,0 +1,99 @@
+<isscript>
+var assets = require('*/cartridge/scripts/assets.js');
+assets.addJs('/js/heroCategory.js'); 
+</isscript>
+
+<div class="container">
+    <div class="row">
+        <div class="col-2">
+            <h3>${'MTB'}</h3>
+            <div class="">
+                <isloop iterator="${pdict.productModel1}" var="recentPhrase" status="loopStatus">
+                    <p>${'Name:'} <isprint value="${recentPhrase.name}"></isprint>
+                    </p>
+
+                    <p>${'Id:'} <isprint value="${recentPhrase.ID}"></isprint>
+                    </p>
+
+                    <p>${'Image URL:'} <isprint value="${recentPhrase.images.small[0].absURL}"></isprint>
+                    </p>
+
+                    <p>Price:
+                        <isset name="productImg"
+                            value="${require('dw/catalog/ProductMgr').getProduct(recentPhrase.ID).getPriceModel().getMaxPrice()}"
+                            scope="page" />
+                        ${productImg}</p>
+
+                    <p>${'Image:'}
+                        <img src="${recentPhrase.images.small[0].absURL}" />
+                    </p>
+                    <hr />
+                    <isif condition=" ${loopStatus.count >= 5}">
+                        <isbreak/>
+                    </isif>
+                </isloop>
+            </div>
+        </div>
+        <div class="col-2">
+            <h3>${'ROAD'}</h3>
+        </div>
+        <div class="col-2">
+            <h3>${'HYBRID'}</h3>
+        </div>
+        <div class="col-2">
+
+            <button type="button" class="categoryButton">${'WOMEN'}</button>
+
+            <h3>${'WOMEN'}</h3>
+            <iscomment>
+                <div>${pdict.womenProducts}</div>
+                <div>${pdict.prodData}</div>
+            </iscomment>
+            <div class="toggleCategory d-none">
+                <isloop iterator="${pdict.productModel}" var="recentPhrase" status="loopStatus">
+                    <p>${'Name:'} <isprint value="${recentPhrase.name}">
+                    </p>
+
+                    <p>${'Id:'} <isprint value="${recentPhrase.ID}">
+                    </p>
+
+                    <p>Images URL: <isprint value="${recentPhrase.images.small[0].absURL}">
+                    </p>
+
+                    <p>Price:
+                        <isset name="productImg"
+                            value="${require('dw/catalog/ProductMgr').getProduct(recentPhrase.ID).getPriceModel().getMaxPrice()}"
+                            scope="page" />
+                        ${productImg}</p>
+
+                    <p>Image new:
+                        <iscomment>
+                            <isset name="productImg" value="${recentPhrase.images.small[0].absURL}" scope="page" />
+                            <a href="${productImg}">${productImg}</a> </iscomment>
+                        <img src="${recentPhrase.images.small[0].url}" />
+                    </p>
+                    <hr />
+                    <isif condition="${loopStatus.count >= 5}">
+                        <isbreak/>
+                    </isif>
+                </isloop>
+            </div>
+        </div>
+        <div class="col-2">
+            <h3>${'KIDS'}</h3>
+        </div>
+    </div>
+</div>
+
+<p>
+    <button class="btn btn-primary abc" type="button" data-toggle="collapse" data-target="#collapseExample"
+        aria-expanded="false" aria-controls="collapseExample">
+        Show
+    </button>
+</p>
+<div class="collapse" class="collapseExample">
+    <div class="card card-body d-none">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim
+        keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+    </div>
+</div>

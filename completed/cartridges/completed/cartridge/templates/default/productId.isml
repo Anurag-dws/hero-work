@@ -1,0 +1,27 @@
+<isdecorate template="common/layout/pageCustom">
+<iscomment>
+
+	TEMPLATENAME: productID.isml </iscomment>
+	<isscript>
+var assets = require('*/cartridge/scripts/assets.js');
+assets.addCss('/css/productID.css'); 
+assets.addJs('/js/productID.js');
+ </isscript>
+
+
+	<h1>From here Enter the Product ID and I will  naviation page to description page </h1>
+
+
+<div id="card">
+ 
+	<form action="${pdict.actionUrl}" method="POST" >
+		
+       
+       <label> ${"Enter the Product ID"} </label> <input type="input" id="pid" class="form-control" name="pid">
+    
+		<button type="submit" class="btn btn-block btn-primary">Submit</button>
+	
+	</form>
+
+</div>
+</isdecorate>

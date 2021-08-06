@@ -1,0 +1,79 @@
+<!-- under testing    -->
+<div class="row">
+  
+    <isloop items="${pdict.esssentialProducts}" var="essentialProduct">
+        <div class="col-md-3">
+            <div class="">
+                <isloop items="${essentialProduct.images['large']}" var="image" status="loopStatus">
+                    <div class='carousel-item <isif condition="${loopStatus.index == 0}">active</isif>'>
+                        <img src="${image.url}" class="d-block img-fluid" alt="${image.alt} image number ${image.index}"
+                            itemprop="image" />
+                    </div>
+                </isloop>
+            </div>
+            <div class="">
+                <h4> ID:
+                    <isprint value="${essentialProduct.id}" />
+                </h4>
+                <h4>
+                    <isprint value="${essentialProduct.productName}" />
+                </h4>
+
+                <p>
+                    <isprint value="${essentialProduct.longDescription.source}" />
+                </p>
+            </div>
+            <div class="row">
+
+                <div class="col md-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                        class="bi bi-cart3" viewBox="0 0 16 16">
+                        <path
+                            d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                    </svg>
+                </div>
+            </div>
+
+            <!-- bundleDetails.isml -->
+            <isset name="product" value="${essentialProduct}" scope="page" />
+            <div class="row cart-and-ipay">
+                <div class="col-sm-12">
+                    <input type="hidden" class="add-to-cart-url" value="${pdict.addToCartUrl}">
+                    <button class="add-to-cart-global btn btn-primary" essential="${true}"
+                        data-pid="${product.id}" ${!product.readyToOrder || !product.available ? "disabled" : ""}>
+                        <i class="fa fa-shopping-bag"></i>
+                        <isif condition="${product.productType === 'set' || product.productType === 'bundle'}">
+                            ${Resource.msg('button.addalltocart', 'common', null)}
+                            <iselse>
+                                ${Resource.msg('button.addtocart', 'common', null)}
+                        </isif>
+                    </button>
+                </div>
+            </div>
+            <!-- bundleDetails.isml ends -->
+
+            <!-- bundleItems.isml -->
+            <div>
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="bundle-items-label">${Resource.msg('label.bundle.contains', 'product', null)}</h2>
+                    </div>
+                </div>
+                <div class="bundle-items">
+                    <isloop items="${essentialProduct.individualProducts}" var="productItem" status="loopState">
+                        <div class="${essentialProduct.id}">
+                            <isset name="product" value="${productItem}" scope="page" />
+                            <isset name="isBundle" value="${true}" scope="page" />
+
+                            <isinclude template="product/components/bundleItem" />
+                        </div>
+                    </isloop>
+                </div>
+
+            </div>
+            <!-- bundleItems.isml ends -->
+
+        </div>
+    </isloop>
+
+</div>

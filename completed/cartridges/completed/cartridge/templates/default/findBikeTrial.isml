@@ -1,0 +1,90 @@
+
+
+
+<isdecorate template="common/layout/pageCustom">
+<iscomment>
+
+	TEMPLATENAME: findBikeTrial.isml </iscomment>
+	<isscript>
+var assets = require('*/cartridge/scripts/assets.js');
+assets.addCss('/css/findBike.css'); 
+assets.addJs('/js/findBike.js');
+ </isscript>
+
+<div class="hero slant-down login-banner">
+	<h1>Find My Bike </h1>
+</div>
+
+<div class="card">
+	<iscomment> filling the findmybike form </iscomment>
+
+	<form action="${pdict.actionUrl}"  class="address-form" method="POST" name="findmybike">
+		<div class="form-group required">
+      
+	        <iscomment> age  </iscomment>
+
+             <div class="form-group
+                ${pdict.findmybike.age.mandatory === true ? 'required' : ''}">
+                <label class="form-control-label" for="age">
+                    <isprint value="${pdict.findmybike.age.label}" encoding="htmlcontent" />
+                </label>
+                <input type="text" class="form-control" id="age"
+                    <isprint value="${pdict.findmybike.age.attributes}" encoding="off" />
+                    >
+                <div class="invalid-feedback"></div>
+            </div>
+
+			 <iscomment> gender  </iscomment>
+
+			<div class="form-group
+                ${pdict.findmybike.gender.mandatory === true ? 'required' : ''}">
+                <label class="form-control-label" for="age">
+                    <isprint value="${pdict.findmybike.gender.label}" encoding="htmlcontent" />
+                </label>
+                <input type="text" class="form-control" id="age"
+                    <isprint value="${pdict.findmybike.gender.attributes}" encoding="off" />
+                    >
+                <div class="invalid-feedback"></div>
+            </div>
+
+			 <iscomment> height  </iscomment>
+
+			<div class="form-group
+                ${pdict.findmybike.height.mandatory === true ? 'required' : ''}">
+                <label class="form-control-label" for="age">
+                    <isprint value="${pdict.findmybike.height.label}" encoding="htmlcontent" />
+                </label>
+                <input type="text" class="form-control" id="age"
+                    <isprint value="${pdict.findmybike.height.attributes}" encoding="off" />
+                    >
+                <div class="invalid-feedback"></div>
+            </div>
+
+			 <iscomment> type of bike(category)  </iscomment>
+
+			<div class="form-group
+                ${pdict.findmybike.category.mandatory === true ? 'required' : ''}">
+                <label class="form-control-label" for="age">
+                    <isprint value="${pdict.findmybike.category.label}" encoding="htmlcontent" />
+                </label>
+                <input type="text" class="form-control" id="age"
+                    <isprint value="${pdict.findmybike.category.attributes}" encoding="off" />
+                    >
+                <div class="invalid-feedback"></div>
+            </div>
+
+         </div>
+           <!-- Cancel and Save Buttons -->
+          <div class="row">
+           
+            
+               <button type="submit" name="save" class="btn btn-save btn-block btn-primary">${Resource.msg('button.save','account',null)}</button>
+         
+          </div>
+
+
+
+	</form>
+
+</div>
+</isdecorate>

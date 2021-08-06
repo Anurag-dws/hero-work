@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<form xmlns="http://www.demandware.com/xml/form/2008-04-19">
+    <field formid="age" label="YourAge" type="string" mandatory="true" max-length="3"/>
+    <field formid="gender" label="Gender" type="string" mandatory="true"/>
+    <field formid="height" label="Height" type="string" mandatory="true" max-length="5"/>
+    <field formid="category" label="TypeofBike" type="string" mandatory="true"/>
+<action formid="submit" valid-form="true"/>
+<action formid="cancel" valid-form="false"/>
+</form>

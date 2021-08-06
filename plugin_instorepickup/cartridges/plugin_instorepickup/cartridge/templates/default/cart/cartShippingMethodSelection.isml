@@ -1,0 +1,63 @@
+<isscript>
+    assets.addJs('/js/cartInstorePickup.js');
+</isscript>
+
+<div class="col-12">
+    <iscomment>
+        <form class="shipping-form" autocomplete="on" novalidate action="${shipmentLoopState ? URLUtils.url('CheckoutAddressServices-AddNewAddress') : URLUtils.url(
+                                                                         'CheckoutShippingServices-SubmitShipping')}"
+            data-address-mode="${shippingModel.matchingAddressId ? 'edit' : 'new'}" <isprint
+            value=${pdict.forms.shippingForm.attributes} encoding="off" />
+    </iscomment>
+
+    <label for="shippingMethods">${Resource.msg('field.selectshippingmethod', 'cart', null)}</label>
+    <select class="custom-select form-control shippingMethods" id="shippingMethods" name="shippingMethods"
+        data-actionUrl="${pdict.actionUrls.selectShippingUrl}" ${pdict.disableShippingMethod}>
+        <isset name="check" value="${false}" scope="page" />
+
+        <isloop items="${pdict.shipments[0].shippingMethods}" var="option" status="loopstate">
+            <isif condition="${pdict.shipments[0].selectedShippingMethod === option.ID}">
+
+                <option selected <isif condition="${option.ID === 'GBP005'}">data-pickup = 'true'
+            </isif> data-shipping-id="${option.ID}">${option.displayName} <isif
+                condition="${option.estimatedArrivalTime}">( ${option.estimatedArrivalTime} )</isif>
+            </option>
+        <iselse/>
+            <option data-shipping-id="${option.ID}"> ${option.displayName} <isif
+                    condition="${option.estimatedArrivalTime}"> ${option.estimatedArrivalTime} </isif>
+            </option>
+            </isif>
+        </isloop>
+    </select>
+
+    <iscomment> editing from here</iscomment>
+    <form class="shipping-form"  URLUtils.url('CheckoutAddressServices-AddNewAddress')>
+        <div class="form-group">
+            <isset name="shippingModel" value="${pdict.basketModel.shipments[0].shippingMethods}" scope="page" />
+            <iscomment>
+                <p>${JSON.stringify(pdict.checkurl)} </p>
+            </iscomment>
+
+
+            <fieldset class="pickup-in-store" data-url="${pdict.checkurl}">
+
+                <isinclude url="${URLUtils.url('Stores-GetStoreById', 'storeId', 'hero_store')}" />
+
+            </fieldset>
+            <iscomment> <button class="btn btn-block btn-outline-primary btn-margin change-store ${shippingModel.selectedShippingMethod.storePickupEnabled && shippingModel.productLineItems.items[0].fromStoreId ? '' :
+                                                                                                 'd-none'}" name="changeStore"
+                    value="changeStore">
+                    ${Resource.msg('button.change.store', 'instorePickup', null)}
+                </button> </iscomment>
+            <iscomment> <button class="btn btn-block btn-outline-primary btn-margin " name="changeStore"
+                    value="changeStore">
+                    ${Resource.msg('button.change.store', 'instorePickup', null)}
+                </button> </iscomment>
+            <button class="btn btn-block btn-outline-primary btn-margin change-store d-none" name="changeStore"
+                value="changeStore" <isif condition="${option.ID === 'GBP005'}">data-pickup = 'true' </isif> >
+                ${Resource.msg('button.change.store', 'instorePickup', null)}
+            </button>
+            <iscomment> editing upto here</iscomment>
+        </div>
+    </form>
+</div>
