@@ -199,19 +199,9 @@ server.get(
         if (currentBasket && currentBasket.allLineItems.length) {
             reportingURLs = reportingUrlsHelper.getBasketOpenReportingURLs(currentBasket);
         }
- //////////////////////////////////////////////
- var checkurl = "/on/demandware.store/Sites-RefArchGlobal-Site/default/Stores-InventorySearch?showMap=false&products=883360520872M%3a1%2c883858858234M%3a1%2cP0138M%3a1&isForm=false" ;
- ////////////////////////////////////////
- var AccountModel = require('*/cartridge/models/account');
- var registeredUser =false;
- var accountModel = new AccountModel(req.currentCustomer);
- if(accountModel.registeredUser){
-     var registeredUser =true;
- }
- ////////////////////////
 
- //////////////
-        res.setViewData({ reportingURLs: reportingURLs,checkurl:checkurl,registeredUser:registeredUser});
+ 
+        res.setViewData({ reportingURLs: reportingURLs});
  
         var basketModel = new CartModel(currentBasket);
         res.render('cart/cart',basketModel);

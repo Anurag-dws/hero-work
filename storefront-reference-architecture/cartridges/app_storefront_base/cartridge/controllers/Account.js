@@ -183,7 +183,7 @@ server.post(
 
         var registrationForm = server.forms.getForm('profile');
 
-        // form validation
+       // form validation
         if (registrationForm.customer.email.value.toLowerCase()
             !== registrationForm.customer.emailconfirm.value.toLowerCase()
         ) {

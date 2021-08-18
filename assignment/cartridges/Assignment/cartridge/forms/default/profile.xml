@@ -32,7 +32,7 @@
 			type="string"/> 
 			<!-- TODO value-error not comming back from the platform -->
 
-		<!-- <field 
+		<field 
 			formid="emailconfirm"
 			label="label.input.emailconfirm.profile"
 			mandatory="true"
@@ -42,7 +42,7 @@
 			range-error="error.message.50orless"
 			regexp="^[\w.%+-]+@[\w.-]+\.[\w]{2,6}$"
 			value-error="ValueErrorText"
-			type="string"/>  -->
+			type="string"/> 
 			<!-- TODO value-error not comming back from the platform -->
 			
 		<field 
@@ -56,7 +56,6 @@
 
 		<field 
 			formid="addtoemaillist" 
-			mandatory="true"
 			label="description.checkbox.emailsignup.profile"  
 			type="boolean"/>
 	</group>
