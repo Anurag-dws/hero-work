@@ -1,0 +1,147 @@
+<!-- completed    -->
+<div class="container-fluid">
+<isif condition="${pdict.esssentialProducts.empty === true}"> 
+<h4><i>Please Link Product set with this Product to see the Essentials Kits</i> </h4></isif>
+<div class="row">
+
+    <isloop items="${pdict.esssentialProducts}" var="essentialProduct" status="status">
+        <div class="col-md-3 ">
+            <iscomment>
+                It is necessary to set both "set" and "product" to pdict.product here as the downstream.
+            </iscomment>
+
+            <isset name="product" value="${essentialProduct}" scope="page" />
+            <isset name="productCopy" value="${essentialProduct}" scope="page" />
+            <isset name="isBundle" value="${false}" scope="page" />
+            <isset name="isProductSet" value="${true}" scope="page" />
+            <isset name="isQuickView" value="${false}" scope="page" />
+            <isobject object="${product.raw}" view="detail" />
+            <iscomment> ISSUE 3 </iscomment>
+            <div class="container product-detail essential-set-detail" data-pid="${product.id}">
+                <div class="row">
+                  <!-- Product Images Carousel -->
+            <isinclude template="product/components/imageCarousel" />
+                    <div class="col-12">
+                        <!---Breadcrumbs--->
+                        <iscomment>
+                            <div class="product-breadcrumb">
+                                <isinclude template="components/breadcrumbs/pageBreadcrumbs" />
+                            </div>
+                        </iscomment>
+                        <!-- Product Name -->
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <p class="product-name">${product.productName}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <iscomment>
+                    <div class="row">
+                        <div class="col-12">
+                            <h4>${Resource.msg('label.set.contains', 'product', null)}</h4>
+                        </div>
+                    </div>
+                </iscomment>
+
+                <iscomment> Boostrap Modal </iscomment>
+                <!-- Button trigger modal -->
+                <iscomment> <p> ${status.count}</p> </iscomment>
+                <iscomment> <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModal1">
+                    <h4>${Resource.msg('label.set.contains', 'product', null)}</h4>
+                </button>
+
+                <!-- Modal 1-->
+                <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel"><b>BEGINNERS' KIT</b> <br> INCLUSION</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+
+
+                                <isinclude template="product/components/mysetItems" />
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <isset name="product" value="${productCopy}" scope="page" />
+                                <div class="row cart-and-ipay">
+                                    <div class="col-sm-12">
+                                        <input type="hidden" class="add-to-cart-url" value="${pdict.addToCartUrl}">
+                                        <button data-dismiss="modal" essential="${true}"
+                                            class="${product.id} add-to-cart-global btn btn-primary"
+                                            data-pid="${product.id}" ${!product.readyToOrder || !product.available ? "disabled" : ""}>
+                                            <i class="fa fa-shopping-bag"></i>
+                                            <isif
+                                                condition="${product.productType === 'set' || product.productType === 'bundle'}">
+                                                ${Resource.msg('button.addalltocart', 'common', null)}
+                                                <iselse>
+                                                    ${Resource.msg('button.addtocart', 'common', null)}
+                                            </isif>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> </iscomment>
+         <isinclude template="product/components/essentialModal" />
+                <div class="col-12 col-sm-6 offset-sm-6 bundle-footer">
+                    <!-- Quantity -->
+                    <div class="col-12 prices-add-to-cart-actions">
+                        <isset name="product" value="${productCopy}" scope="page" />
+                        <!-- Prices -->
+                       <div class="price">
+                            <span class="starting">
+                                ${Resource.msg('label.starting_from', 'pricing', null)}
+                                <isif condition="${product.price.min}">
+                                    ${product.price.min.sales.formatted}
+                                    <iselse>
+                                        ${product.price.sales.formatted}
+                                </isif>
+                            </span>
+                        </div> 
+                        <iscomment>
+                            <isinclude template="product/components/pricing/setPrice" />
+                        </iscomment>
+                        <!-- Cart and [Optionally] Apple Pay -->
+                        <iscomment>
+                            <div class="row cart-and-ipay">
+                                <div class="col-sm-12">
+                                    <input type="hidden" class="add-to-cart-url" value="${pdict.addToCartUrl}">
+                                    <button essential="${true}" class="${product.id} add-to-cart-global btn btn-primary"
+                                        data-pid="${product.id}" ${!product.readyToOrder || !product.available ? "disabled" : ""}>
+                                        <i class="fa fa-shopping-bag"></i>
+                                        <isif
+                                            condition="${product.productType === 'set' || product.productType === 'bundle'}">
+                                            ${Resource.msg('button.addalltocart', 'common', null)}
+                                            <iselse>
+                                                ${Resource.msg('button.addtocart', 'common', null)}
+                                        </isif>
+                                    </button>
+                                </div>
+                            </div>
+                        </iscomment>
+
+
+                        <iscomment>
+                            <isinclude template="product/components/addToCartGlobal" />
+                        </iscomment>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </isloop>
+</div>
+</div>

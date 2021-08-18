@@ -202,7 +202,16 @@ server.get(
  //////////////////////////////////////////////
  var checkurl = "/on/demandware.store/Sites-RefArchGlobal-Site/default/Stores-InventorySearch?showMap=false&products=883360520872M%3a1%2c883858858234M%3a1%2cP0138M%3a1&isForm=false" ;
  ////////////////////////////////////////
-        res.setViewData({ reportingURLs: reportingURLs,checkurl:checkurl });
+ var AccountModel = require('*/cartridge/models/account');
+ var registeredUser =false;
+ var accountModel = new AccountModel(req.currentCustomer);
+ if(accountModel.registeredUser){
+     var registeredUser =true;
+ }
+ ////////////////////////
+
+ //////////////
+        res.setViewData({ reportingURLs: reportingURLs,checkurl:checkurl,registeredUser:registeredUser});
  
         var basketModel = new CartModel(currentBasket);
         res.render('cart/cart',basketModel);

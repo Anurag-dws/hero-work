@@ -1,9 +1,13 @@
 <div class="set-items" itemtype="http://schema.org/SomeProducts" itemid="#product">
+ <div class="row">
     <isloop items="${productCopy.individualProducts}" var="productItem" status="loopState">
         <isset name="product" value="${productItem}" scope="page" />
-      <iscomment>set the prodcut set id as the class for all the product sets of resepective product set </iscomment>
-            <div class="${essentialProduct.id} container product-detail set-item" data-pid="${product.id}">
-                 <iscomment> <div class="row">
+         <div class="col-md-6 col-sm-12">
+        <iscomment>set the product set id as the class for all the product sets of resepective product set </iscomment>
+        <div class="${essentialProduct.id} container product-detail set-item" data-pid="${product.id}"
+            data-essential="${true}">
+            <iscomment>
+                <div class="row">
                     <div class="col-12">
                         <!-- Product Name -->
                         <div class="row">
@@ -16,15 +20,25 @@
                             </div>
                         </div>
                     </div>
-                </div> </iscomment>
+                </div>
+            </iscomment>
 
-                <div class="row">
-                    <!-- Product Images Carousel -->
-                    <isinclude template="product/components/imageCarousel" />
+            <div class="row">
+                <!-- Product Images Carousel -->
+                <isinclude template="product/components/imageCarousel" />
 
-                    <div class="col-12 col-sm-6">
-                        <!-- Product Name -->
-                        <iscomment> <div class="row">
+                <div class="col-12 col-sm-6">
+
+                    <iscomment> on the ajax call for the PDP page product this all the product id is changing of the
+                        product set </iscomment>
+                    <!-- Product Number -->
+                    <div class="product-number pull-left">
+                        ${Resource.msg('label.item', 'product', null)}
+                        <span class="product-id">${product.id}</span>
+                    </div>
+                    <!-- Product Name -->
+                    <iscomment>
+                        <div class="row">
                             <div class="col">
                                 <h3 class="product-name hidden-sm-down">
                                     <a href="${URLUtils.url('Product-Show', 'pid', product.id)}">
@@ -32,52 +46,62 @@
                                     </a>
                                 </h3>
                             </div>
-                        </div> </iscomment>
-
-                        <div class="row">
-                             <div class="col">
-                                <isinclude template="product/components/pidRating" />
-                            </div> 
                         </div>
+                    </iscomment>
 
-                        <div class="attributes">
-                       
-                            <iscomment> <isinclude template="product/components/mainAttributes" /> </iscomment>
-                      
-                            <isif condition="${product.variationAttributes}">
-                                <isloop items="${product.variationAttributes}" var="attr" status="attributeStatus">
-                                    <div class="swatch row" data-attr="${attr.id}">
-                                        <div class="col-8">
-                                            <isinclude template="product/components/variationAttribute" />
-                                        </div>
+                    <iscomment>
+                        <div class="row">
+                            <div class="col">
+                                <isinclude template="product/components/pidRating" />
+                            </div>
+                        </div>
+                    </iscomment>
 
-                                        <isif condition="${attributeStatus.last && !isBundle && product.options.length === 0}">
-                                            <!-- Quantity Drop Down Menu -->
-                                            <div class="attribute quantity col-4">
-                                                <iscomment> <isinclude template="product/components/quantity" /> </iscomment>
-                                            </div>
-                                        </isif>
+                    <div class="attributes">
+
+                        <iscomment>
+                            <isinclude template="product/components/mainAttributes" />
+                        </iscomment>
+
+                        <isif condition="${product.variationAttributes}">
+                            <isloop items="${product.variationAttributes}" var="attr" status="attributeStatus">
+                                <div class="swatch row" data-attr="${attr.id}">
+                                    <div class="col-8">
+                                        <isinclude template="product/components/variationAttribute" />
                                     </div>
-                                </isloop>
-                            </isif>
 
-                            <isif condition="${(product.options && !product.options.length && !product.variationAttributes)}">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="simple-quantity">
-                                            <isinclude template="/product/components/quantity" />
+                                    <isif
+                                        condition="${attributeStatus.last && !isBundle && product.options.length === 0}">
+                                        <!-- Quantity Drop Down Menu -->
+                                        <div class="attribute quantity col-4">
+                                            <iscomment>
+                                                <isinclude template="product/components/quantity" />
+                                            </iscomment>
                                         </div>
+                                    </isif>
+                                </div>
+                            </isloop>
+                        </isif>
+
+                        <isif
+                            condition="${(product.options && !product.options.length && !product.variationAttributes)}">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="simple-quantity">
+                                        <isinclude template="/product/components/quantity" />
                                     </div>
                                 </div>
-                            </isif>
+                            </div>
+                        </isif>
 
-                            <isif condition="${product.options && product.options.length}">
-                                <div class="row">
-                                    <isinclude template="product/components/options" />
-                                </div>
-                            </isif>
+                        <isif condition="${product.options && product.options.length}">
+                            <div class="row">
+                                <isinclude template="product/components/options" />
+                            </div>
+                        </isif>
 
-                            <!-- Size Chart -->
+                        <!-- Size Chart -->
+                        <iscomment>
                             <isif condition="${product.variationAttributes && product.sizeChartId}">
                                 <div class="row">
                                     <div class="size-chart col-12">
@@ -85,17 +109,44 @@
                                     </div>
                                 </div>
                             </isif>
+                        </iscomment>
 
-                            <!-- Product Availability -->
-                            <iscomment> <isinclude template="product/components/productAvailability" /> </iscomment>
+                        <!-- Product Availability -->
 
-                            <!-- Applicable Promotions -->
-                            <iscomment> <div class="row">
+                        <iscomment>
+                            <isinclude template="product/components/productAvailability" />
+                        </iscomment>
+                        <div class="row availability product-availability" data-ready-to-order="${product.readyToOrder}"
+                            data-available="${product.available}">
+                            <div class="col-4">
+                                <iscomment> <span class="availability non-input-label">
+                                    ${Resource.msg('label.availability', 'common', null)}:
+                                </span> </iscomment>
+                            </div>
+                            <div class="col-8">
+                                <ul class="list-unstyled availability-msg">
+                                    <li>
+                                        <isif condition="${!product.readyToOrder}">
+                                            <iscomment> <div> ${Resource.msg('info.selectforstock', 'product', 'Select Styles forAvailability ')}</div> </iscomment>
+                                            <iselse>
+                                                <isloop items="${product.availability.messages}" var="message">
+                                                    <iscomment> <div>${message}</div> </iscomment>
+                                                </isloop>
+                                        </isif>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Applicable Promotions -->
+                        <iscomment>
+                            <div class="row">
                                 <div class="col-12 promotions">
                                     <isinclude template="product/components/promotions" />
                                 </div>
-                            </div> </iscomment>
-
+                            </div>
+                        </iscomment>
+                        <iscomment>
                             <hr>
 
                             <div class="row">
@@ -107,23 +158,31 @@
                                     </div>
                                 </div>
                             </div>
+                        </iscomment>
 
-                            <!-- Cart and [Optionally] Apple Pay -->
-                            <iscomment> <isinclude template="product/components/addToCartProduct" /> </iscomment>
+                        <!-- Cart and [Optionally] Apple Pay -->
+                        <iscomment>
+                            <isinclude template="product/components/addToCartProduct" />
+                        </iscomment>
 
-                            <iscomment> <div class="row">
+                        <iscomment>
+                            <div class="row">
                                 <isinclude template="product/components/socialIcons" />
-                            </div> </iscomment>
-                        </div>
+                            </div>
+                        </iscomment>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+        <iscomment>
+            <isinclude template="product/components/descriptionAndDetails" />
+        </iscomment>
 
-            <iscomment> <isinclude template="product/components/descriptionAndDetails" /> </iscomment>
-
-            <isif condition="${loopState.last === false}">
-                <hr>
-            </isif>
+        <isif condition="${loopState.last === false}">
+            <hr>
+        </isif>
         </isobject>
     </isloop>
+  </div>
 </div>

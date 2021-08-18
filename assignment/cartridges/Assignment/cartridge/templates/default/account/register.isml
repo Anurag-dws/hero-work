@@ -1,0 +1,32 @@
+
+<isdecorate template="common/layout/page">
+    <isscript>
+        var assets = require('*/cartridge/scripts/assets.js');
+        assets.addCss('/css/login.css');
+        assets.addJs('/js/login.js');
+    </isscript>
+
+ <div class="row container">
+     <div class="col-md-6"> <h1 class="row justify-content-center"> <b>CREATE </b><br/>AN ACCOUNT </h1></div>
+       <div class="col-md-6">
+          <div class="container login-page">
+        <!---Breadcrumbs--->
+        <iscomment> <isinclude template="components/breadcrumbs/pageBreadcrumbs"/> </iscomment>
+    
+   
+        <div class="row justify-content-center equal-height">
+            <iscomment> <div class="col-sm-8 col-md-6"> </iscomment>
+                <div class="card">
+                    <div class="card-body">
+                       
+                          
+                                    <isinclude template="account/components/registerForm" />
+                        </div>
+                    </div>
+                </div>
+            <iscomment> </div> </iscomment>
+        </div>
+        </div>
+   
+      </div>
+</isdecorate>

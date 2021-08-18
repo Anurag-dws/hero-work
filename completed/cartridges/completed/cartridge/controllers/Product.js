@@ -8,7 +8,7 @@ var ProductMgr = require('dw/catalog/ProductMgr');
  * @param {returns} - set all the attribute value assocaited with the product
  */
 function setAllAttribute(viewData){
-    var pid = viewData.product.id;
+    var pid = viewData.product.id;//queryString.split("=")[1];
    
     var Product = ProductMgr.getProduct(pid); // will return the info of the product using the product id
     ////////////////////////////////////////
@@ -64,11 +64,13 @@ function setAlllinkedProducts(viewData){
     var Proudct_ = ProductMgr.getProduct( viewData.product.id); 
     var ProductFactory = require('*/cartridge/scripts/factories/product');
     viewData.esssentialProducts =[];
+    viewData.esssentialProducts.count=0;
      var allProductLinks =  Proudct_.getAllProductLinks(); //will get the list of all the linked essential Products;
      for(let i=0;i<allProductLinks.size();i++){
         let obj={}
         obj.pid=allProductLinks[i].targetProduct.ID ; //we need to create the string as query parameter and send in to product factory
         viewData.esssentialProducts.push(ProductFactory.get(obj));
+        viewData.esssentialProducts.count++;
      } 
      return ;
 }

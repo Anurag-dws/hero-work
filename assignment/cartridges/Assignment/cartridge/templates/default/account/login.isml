@@ -1,0 +1,46 @@
+<isdecorate template="common/layout/page">
+    <isscript>
+        var assets = require('*/cartridge/scripts/assets.js');
+        assets.addCss('/css/login.css');
+        assets.addJs('/js/login.js');
+    </isscript>
+
+    <div class="row container">
+     <div class="col-md-6"> <h1 class="row justify-content-center"> <b>HELLO </b><br/> THERE!! </h1></div>
+       <div class="col-md-6">
+          <div class="container login-page">
+        <!---Breadcrumbs--->
+        <iscomment> <isinclude template="components/breadcrumbs/pageBreadcrumbs"/> </iscomment>
+    
+   
+        <div class="row justify-content-center equal-height">
+            <iscomment> <div class="col-sm-8 col-md-6"> </iscomment>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="login-form-nav">
+                            <iscomment> <isinclude template="account/components/navTabs" /> </iscomment>
+                           
+                            <div class="tab-content ">
+                                <iscomment> <div class="tab-pane ${pdict.navTabValue === 'login' ? 'active' : ''}" id="login" role="tabpanel" aria-labelledby="login-tab"> </iscomment>
+                                    <isinclude template="account/components/loginForm" />
+                
+                                    <iscomment> <isinclude template="account/password/requestPasswordResetModal"/> </iscomment>
+                                  <p> New to FireFox ?      <a href="${URLUtils.url('Login-Register')}"> Create an account </a> 
+                                   </p>
+                                    <isinclude template="account/components/oauth" />
+                                </div>
+                             
+                                <iscomment> <div class="tab-pane ${pdict.navTabValue === "register" ? 'active' : ''}" id="register" role="tabpanel" aria-labelledby="register-tab">
+                                    <isinclude template="account/components/registerForm" />
+                                </div> </iscomment>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <iscomment> </div> </iscomment>
+        </div>
+        </div>
+   
+      </div>
+     
+</isdecorate>

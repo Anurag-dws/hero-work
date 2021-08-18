@@ -1,0 +1,106 @@
+ <!-- display  Attribute Group  -->
+  <isscript>
+        var assets = require('*/cartridge/scripts/assets');
+        assets.addJs('/js/demo.js'); //for detailed specification
+         //assets.addJs('/js/search.js'); //for compare bar
+       // assets.addCss('/css/search.css'); // for compare bar
+    </isscript>
+<div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3 col-sm-6">
+                <button class="btn btn-info frameSetBtn"> FrameSet</button>
+                <div class="frameSet">
+                    <isloop iterator="${pdict.frameSet}" var="attri" status="attributeStatus">
+                        <isif condition="${typeof(attri.attriValue) === 'object'}">
+                            <img src="${attri.attriValue.absURL}" alt="${attri.attriName}" width="100px"
+                                height="100px" />
+                        </isif>
+                        <isif condition="${typeof(attri.attriValue) === 'string'}">
+                            <div class="row">
+                                <p>
+                                    <isprint value="${attri.attriName}"></isprint>
+                                    : <isprint value="${attri.attriValue}"> </isprint>
+                                </p>
+                            </div>
+                        </isif>
+                    </isloop>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <button class="btn btn-info driveBtn"> DriveTrain</button>
+                <div class="drive">
+                    <isloop iterator="${pdict.drivetrain}" var="attri" status="attributeStatus">
+                       <isif condition="${typeof(attri.attriValue) === 'object'}">
+                            <img src="${attri.attriValue.absURL}" alt="${attri.attriName}" width="100px"
+                                height="100px" />
+                        </isif>
+                        <isif condition="${typeof(attri.attriValue) === 'string'}">
+                            <div class="row">
+                                <p>
+                                    <isprint value="${attri.attriName}"></isprint>
+                                    : <isprint value="${attri.attriValue}"> </isprint>
+                                </p>
+                            </div>
+                        </isif>
+                    </isloop>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <button class="btn btn-info wheelsBtn">Wheels</button>
+                <div class="wheels">
+                    <isloop iterator="${pdict.wheels}" var="attri" status="attributeStatus">
+                       <isif condition="${typeof(attri.attriValue) === 'object'}">
+                            <img src="${attri.attriValue.absURL}" alt="${attri.attriName}" width="100px"
+                                height="100px" />
+                        </isif>
+                        <isif condition="${typeof(attri.attriValue) === 'string'}">
+                            <div class="row">
+                                <p>
+                                    <isprint value="${attri.attriName}"></isprint>
+                                    : <isprint value="${attri.attriValue}"> </isprint>
+                                </p>
+                            </div>
+                        </isif>
+                    </isloop>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <button class="btn btn-info componentsBtn">Components</button>
+                <div class="components">
+                    <isloop iterator="${pdict.components}" var="attri" status="attributeStatus">
+                       <isif condition="${typeof(attri.attriValue) === 'object'}">
+                            <img src="${attri.attriValue.absURL}" alt="${attri.attriName}" width="100px"
+                                height="100px" />
+                        </isif>
+                        <isif condition="${typeof(attri.attriValue) === 'string'}">
+                            <div class="row">
+                                <p>
+                                    <isprint value="${attri.attriName}"></isprint>
+                                    : <isprint value="${attri.attriValue}"> </isprint>
+                                </p>
+                            </div>
+                        </isif>
+                    </isloop>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <button class="btn btn-info extraBtn">Extra</button>
+                <div class="extra">
+                    <isloop iterator="${pdict.extra}" var="attri" status="attributeStatus">
+                        <isif condition="${typeof(attri.attriValue) === 'object'}">
+                            <img src="${attri.attriValue.absURL}" alt="${attri.attriName}" width="100px"
+                                height="100px" />
+                        </isif>
+                        <isif condition="${typeof(attri.attriValue) === 'string'}">
+                            <div class="row">
+                                <p>
+                                    <isprint value="${attri.attriName}"></isprint>
+                                    : <isprint value="${attri.attriValue}"> </isprint>
+                                </p>
+                            </div>
+                        </isif>
+                    </isloop>
+                </div>
+            </div>
+        </div>
+           </div>

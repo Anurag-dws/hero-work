@@ -1,0 +1,7 @@
+<div class="mb-sm-3">
+    <a href="${ pdict.registeredUser ?  URLUtils.https('Checkout-Begin'): URLUtils.https('Login-Show','rurl','4') }"
+        class="btn btn-primary btn-block checkout-btn ${pdict.valid.error ? 'disabled' : ''}" role="button">
+        ${Resource.msg('button.checkout', 'cart', null)}
+    </a>
+</div>
+

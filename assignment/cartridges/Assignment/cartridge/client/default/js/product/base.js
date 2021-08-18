@@ -22,22 +22,24 @@ function getPidValue($el) {
    // var attr = $($el).is('essential');
     //Console.log(`attibute value is ${attr}`);
      if(essentialsBundle){
-         var mainpid= $($el).data('pid');   // got the main pi(set pid ) of addAllProductToCart button
-         console.log('success got the pid');  // now find all the pids of the set items;
+         var mainpid= $($el).data('pid');   // got the main pid(set pid ) of addAllProductToCart button
+        // console.log('success got the pid');  // now find all the pids of the set items;
+        // console.log(`${mainpid}`);
          pid = $(`.${mainpid}`).find('.product-id').text();
         
      }
     else if ($('#quickViewModal').hasClass('show') && !$('.product-set').length) {
+        //ISSUE 3
         pid = $($el).closest('.modal-content').find('.product-quickview').data('pid');
     } else if ($('.product-set-detail').length || $('.product-set').length) {
         pid = $($el).closest('.product-detail').find('.product-id').text();
-        console.log(`pid of set is ${pid}`);
+        //console.log(`pid of set is ${pid}`);
        
     } 
     else {
         pid = $('.product-detail:not(".bundle-item")').data('pid');
     }
-    console.log(`jquery pid is ${pid}`);
+    //console.log(`jquery pid is ${pid}`);
     return pid;
 }
 
@@ -47,8 +49,9 @@ function getPidValue($el) {
  * @return {jquery} - quantity selector DOM container
  */
 function getQuantitySelector($el) {
+
     var quantitySelected;
-    if ($el && $('.set-items').length) {
+     if ($el && $('.set-items').length) {
         quantitySelected = $($el).closest('.product-detail').find('.quantity-select');
     } else if ($el && $('.product-bundle').length) {
         var quantitySelectedModal = $($el).closest('.modal-footer').find('.quantity-select');
@@ -70,7 +73,13 @@ function getQuantitySelector($el) {
  * @return {string} - value found in the quantity input
  */
 function getQuantitySelected($el) {
+    if(essentialsBundle) {   
+        //coming from essential bundle then it predefined and value is always 1;
+        return "1";
+    }
+    else {
     return getQuantitySelector($el).val();
+}
 }
 
 /**
@@ -364,7 +373,7 @@ function attributeSelect(selectedValueUrl, $productContainer) {
     if (selectedValueUrl) {
         $('body').trigger('product:beforeAttributeSelect',
             { url: selectedValueUrl, container: $productContainer });
-
+            //console.log("hello there");
         $.ajax({
             url: selectedValueUrl,
             method: 'GET',
@@ -380,6 +389,7 @@ function attributeSelect(selectedValueUrl, $productContainer) {
                 $.spinner().stop();
             }
         });
+        //console.log("hey aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
     }
 }
 
@@ -453,7 +463,6 @@ function chooseBonusProducts(data) {
         + '</div>';
     $('body').append(htmlString);
     $('.modal-body').spinner().start();
-
     $.ajax({
         url: bonusUrl,
         method: 'GET',
@@ -510,30 +519,16 @@ function handlePostCartAdd(response) {
  *
  * @return {string[]} - List of selected bundle product item ID's
  */
-function getChildProducts(pid) {
+function getChildProducts() {
     var childProducts = [];
-    console.log("bundled item is");
-    // attribute named 'essential' is prsent in the bundled product of the Essetial item;
-    //if we want to pick the bundled products of the Essentials Products of the PDP Page
-    let attr = $('.product-detail').attr('essential');
-    if(essentialsBundle){
-      //now find the child product of the currently selected Essentials Bundle item
-      $(`.${pid}`).each(function () {
-        console.log(this);
-        childProducts.push({
-            pid: $(this).find('.product-id').text(),
-            quantity: parseInt($(this).find('label.quantity').data('quantity'), 10)
-        });
-    });
-    }else{
+    
     $('.bundle-item').each(function () {
-        console.log(this);
+        //console.log(this);
         childProducts.push({
             pid: $(this).find('.product-id').text(),
             quantity: parseInt($(this).find('label.quantity').data('quantity'), 10)
         });
     });
-    }
     return childProducts.length ? JSON.stringify(childProducts) : [];
 }
 
@@ -581,6 +576,7 @@ function miniCartReportingUrl(url) {
 }
 
 module.exports = {
+   
     attributeSelect: attributeSelect,
     methods: {
         editBonusProducts: function (data) {
@@ -615,8 +611,10 @@ module.exports = {
 
     colorAttribute: function () {
         $(document).on('click', '[data-attr="color"] button', function (e) {
+           // console.log('called');
+            //console.log($(this));
             e.preventDefault();
-
+           
             if ($(this).attr('disabled')) {
                 return;
             }
@@ -632,7 +630,8 @@ module.exports = {
     selectAttribute: function () {
         $(document).on('change', 'select[class*="select-"], .options-select', function (e) {
             e.preventDefault();
-
+            //console.log('called');
+             //console.log($(this));
             var $productContainer = $(this).closest('.set-item');
             if (!$productContainer.length) {
                 $productContainer = $(this).closest('.product-detail');
@@ -644,8 +643,10 @@ module.exports = {
     availability: function () {
         $(document).on('change', '.quantity-select', function (e) {
             e.preventDefault();
-
+           // console.log('called availeded');
+           // console.log($(this));
             var $productContainer = $(this).closest('.product-detail');
+           // console.log($productContainer);
             if (!$productContainer.length) {
                 $productContainer = $(this).closest('.modal-content').find('.product-quickview');
             }
@@ -663,7 +664,7 @@ module.exports = {
             var pid;
             var pidsObj;
             var setPids;
-           console.log(this);
+           //console.log(this);
             isEssentialsBundle(this);  //calling to check whether this is an essentials bundle product or not ;
             $('body').trigger('product:beforeAddToCart', this);
             ////////////////////////////////////////////////////////
@@ -675,7 +676,7 @@ module.exports = {
                     if ($(this).hasClass('set-item')) {
                         setPids.push({
                             pid: $(this).find('.product-id').text(),
-                            qty: 1//$(this).find('.quantity-select').val(),
+                            qty: "1"//$(this).find('.quantity-select').val(),
                             , options: getOptions($(this))
                         });
                     }
@@ -688,7 +689,7 @@ module.exports = {
               
                 $('.product-detail').each(function () {
                     if (!$(this).hasClass('product-set-detail')) {
-                        console.log(this);
+                        //console.log(this);
                         setPids.push({
                             pid: $(this).find('.product-id').text(),
                             qty: $(this).find('.quantity-select').val(),
@@ -700,7 +701,7 @@ module.exports = {
             }
 
             pid = getPidValue($(this));
-            //pid="microsoft-xbox360-bundleM";
+          
             var $productContainer = $(this).closest('.product-detail');
             if (!$productContainer.length) {
                 $productContainer = $(this).closest('.quick-view-dialog').find('.product-detail');
@@ -711,7 +712,7 @@ module.exports = {
             var form = {
                 pid: pid,
                 pidsObj: pidsObj,
-                childProducts: getChildProducts(pid),
+                childProducts: getChildProducts(),
                 quantity: getQuantitySelected($(this))
             };
             
@@ -719,8 +720,8 @@ module.exports = {
             if (!$('.bundle-item').length) {
                 form.options = getOptions($productContainer);
             }
-            console.log("form is : ");
-            console.log(form);
+           // console.log("form is : ");
+           // console.log(form);
             $(this).trigger('updateAddToCartFormData', form);
             if (addToCartUrl) {
                 $.ajax({
@@ -738,10 +739,12 @@ module.exports = {
                     }
                 });
             }
+            essentialsBundle= false;   //ISSUE- 2
         });
     },
     selectBonusProduct: function () {
         $(document).on('click', '.select-bonus-product', function () {
+           
             var $choiceOfBonusProduct = $(this).parents('.choice-of-bonus-product');
             var pid = $(this).data('pid');
             var maxPids = $('.choose-bonus-product-dialog').data('total-qty');
@@ -792,6 +795,7 @@ module.exports = {
     },
     enableBonusProductSelection: function () {
         $('body').on('bonusproduct:updateSelectButton', function (e, response) {
+            //console.log("bonus product clicked ");
             $('button.select-bonus-product', response.$productContainer).attr('disabled',
                 (!response.product.readyToOrder || !response.product.available));
             var pid = response.product.id;
@@ -802,6 +806,7 @@ module.exports = {
         $(document).on('click', '.show-more-bonus-products', function () {
             var url = $(this).data('url');
             $('.modal-content').spinner().start();
+           
             $.ajax({
                 url: url,
                 method: 'GET',

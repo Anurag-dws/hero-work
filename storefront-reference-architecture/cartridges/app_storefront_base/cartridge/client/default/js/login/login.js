@@ -80,6 +80,7 @@ module.exports = {
             var form = $(this);
             e.preventDefault();
             var url = form.attr('action');
+           
             form.spinner().start();
             $('.reset-password-form').trigger('login:register', e);
             $.ajax({
