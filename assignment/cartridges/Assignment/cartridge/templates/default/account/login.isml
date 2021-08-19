@@ -1,46 +1,62 @@
-<isdecorate template="common/layout/page">
+<isdecorate template="common/layout/pdStorePage">
     <isscript>
         var assets = require('*/cartridge/scripts/assets.js');
         assets.addCss('/css/login.css');
         assets.addJs('/js/login.js');
-    </isscript>
+        assets.addJs('/js/pg-pdp.js');
+         assets.addCss('/css/pg-pdp.css');
+         assets.addCss('/css/global.css');
 
+    </isscript>
+<iscomment> 
     <div class="row container">
-     <div class="col-md-6"> <h1 class="row justify-content-center"> <b>HELLO </b><br/> THERE!! </h1></div>
-       <div class="col-md-6">
-          <div class="container login-page">
-        <!---Breadcrumbs--->
-        <iscomment> <isinclude template="components/breadcrumbs/pageBreadcrumbs"/> </iscomment>
-    
-   
-        <div class="row justify-content-center equal-height">
-            <iscomment> <div class="col-sm-8 col-md-6"> </iscomment>
-                <div class="card">
-                    <div class="card-body">
-                        <div class="login-form-nav">
-                            <iscomment> <isinclude template="account/components/navTabs" /> </iscomment>
-                           
-                            <div class="tab-content ">
-                                <iscomment> <div class="tab-pane ${pdict.navTabValue === 'login' ? 'active' : ''}" id="login" role="tabpanel" aria-labelledby="login-tab"> </iscomment>
-                                    <isinclude template="account/components/loginForm" />
+        <div class="col-md-6">
+            <h1 class="row justify-content-center"> <b>HELLO </b><br /> THERE!! </h1>
+        </div>
+        <div class="col-md-6">
+            <div class="container login-page">
+        
+
+                <div class="row justify-content-center equal-height">
                 
-                                    <iscomment> <isinclude template="account/password/requestPasswordResetModal"/> </iscomment>
-                                  <p> New to FireFox ?      <a href="${URLUtils.url('Login-Register')}"> Create an account </a> 
-                                   </p>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="login-form-nav">
+                              
+                                <div class="tab-content ">
+                                 
+                                    <isinclude template="account/components/loginForm" />
+
+                                 
+                                    <p> New to FireFox ? <a href="${URLUtils.url('Login-Register')}"> Create an account
+                                        </a>
+                                    </p>
                                     <isinclude template="account/components/oauth" />
                                 </div>
-                             
-                                <iscomment> <div class="tab-pane ${pdict.navTabValue === "register" ? 'active' : ''}" id="register" role="tabpanel" aria-labelledby="register-tab">
-                                    <isinclude template="account/components/registerForm" />
-                                </div> </iscomment>
                             </div>
                         </div>
                     </div>
                 </div>
-            <iscomment> </div> </iscomment>
         </div>
-        </div>
-   
       </div>
-     
+    </div> </iscomment>
+
+     <section>
+        <div class="cp-banner typ-form login">
+            <div class="container">
+                <div class="banner-cont">
+                    <div class="cont-wrap">
+                        <h2 class="banner-title"><span class="typ-1">Hello</span> <span
+                                class="cm-line-break typ-2">There!!</span></h2>
+                     <p class="desc">Login to lorem ipsum dolor amet orem ipsum dolor amet</p>
+                    </div>
+                    <div class="bs-box login js-btnEnabled2">
+                                    <isinclude template="account/components/loginForm" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
 </isdecorate>

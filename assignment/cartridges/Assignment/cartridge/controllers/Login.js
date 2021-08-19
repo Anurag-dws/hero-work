@@ -81,7 +81,8 @@ var consentTracking = require('*/cartridge/scripts/middleware/consentTracking');
     'ForgotPassword',
     server.middleware.https,
     function (req, res, next) { 
-        res.render('account/password/requestPasswordResetModal');
+        //changed template rendering from password requestPasswordResetModal to requestPasswordReset; 
+        res.render('account/password/requestPasswordReset');
         next();
     }
 );
